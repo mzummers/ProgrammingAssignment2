@@ -1,28 +1,35 @@
-## Test only to figure out github
-## Assignment 2
-## cache matrix that can cache its inverse
 
-makeCacheMatrix <- function(x = matrix()) {
-    
-    CacheMatrix<<- x
-    InverseMatrix<<- solve(x)
-    m<<- NULL
+##
+## converting class example into class project
+## does not calculate the determinant of matrix to check if it can be inverted
+##
+
+## Make Matrix to assign values
+
+makeMatrix <- function(x = numeric()) {
+  m <- NULL
+  set <- function(y) {
+    x <<- y
+    m <<- NULL
+  }
+  get <- function() x
+  setinverse <- function(inverse) m <<- inverse
+  getinverse <- function() m
+  list(set = set, get = get,
+       setinverse = setinverse,
+       getinverse = getinverse)
 }
 
-## Test only to figure out github
-## Assignment 2
+## Caching will do actual inversion of matrix or lookup in cache
 
-cacheSolve <- function(x, ...) {
-  
-  ## Return a matrix that is the inverse of 'x'
-  
-      m<- solve(x)
-      
-      if (m = CacheMatrix) {
-          message("getting cached matrix")
-          return(InverseMatrix)
-      }
-      
-      cacheSolve<- m
-  
+cacheMatrix <- function(x, ...) {
+  m <- x$getinverse()
+  if(!is.null(m)) {
+    message("getting cached data")
+    return(m)
+  }
+  data <- x$get()
+  m <- solve(data)
+  x$setinverse(m)
+  m
 }
