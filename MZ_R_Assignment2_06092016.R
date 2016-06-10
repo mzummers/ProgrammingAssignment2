@@ -1,4 +1,3 @@
-m1<-matrix(1:4,2,2)
 
 ##
 ## converting class example into class project
